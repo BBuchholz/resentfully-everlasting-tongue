@@ -1,30 +1,94 @@
 <script>
-	export let name;
+
+  import Modal from 'svelte-simple-modal';
+  import Notifications from 'svelte-notifications';
+
+  import { 
+    modal,
+    headerQuote,
+  } from './stores.js';
+
+  import MyriadNotification from './MyriadNotification.svelte';
+
+  import Alexandria from './Alexandria.svelte';
+
 </script>
 
-<main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
-</main>
+
+<Notifications item={MyriadNotification}>
+
+  <Modal show={$modal}>
+    
+    <main>
+
+      <div class='header'>
+        
+        <p>
+        
+        {$headerQuote.content}
+        
+        </p>
+        
+        <p>
+
+        - {$headerQuote.source}
+
+        </p>
+      
+      </div>
+
+      <Alexandria />
+
+      <div class='footer'>
+        
+        a Temple Cathedral Tomb production
+
+      </div>
+
+    </main>
+
+  </Modal>
+
+</Notifications>
 
 <style>
-	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
-	}
 
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
-	}
+@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300&display=swap');
 
-	@media (min-width: 640px) {
-		main {
-			max-width: none;
-		}
-	}
+.header, .footer {
+  width: 80%;
+  position: relative;
+  height: auto;
+  padding: 20px;
+  margin: 20px;
+}
+
+.header {
+  font-family: 'Averia Serif Libre', cursive;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 17px;
+
+}
+
+.footer {
+  font-family: 'Averia Serif Libre', cursive;
+  font-size: 18px;
+  font-style: italic;
+  line-height: 17px;
+}
+
+main {
+  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+
 </style>
