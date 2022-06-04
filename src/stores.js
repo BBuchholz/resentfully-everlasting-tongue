@@ -12,6 +12,21 @@ export const passPhrase = writable('daedalus');
 
 export const previousTurnInfo = writable('');
 
+export const currentBook = writable('');
+
+export const currentBookTitle = derived(
+	[currentBook], 
+	([$currentBook]) => {
+
+	if($currentBook) {
+
+    return $currentBook.title;
+  }
+
+  return '(no book currently open)';
+  
+});
+
 export const headerQuote = derived(
 	[passPhrase, ],
 	([$passPhrase, ]) => {
