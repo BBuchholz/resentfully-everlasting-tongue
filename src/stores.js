@@ -11,6 +11,7 @@ export const modal = writable(null);
 export const passPhrase = writable('daedalus');
 
 export const previousTurnInfo = writable('');
+export const currentBookCount = writable(0);
 
 export const currentBook = writable('');
 

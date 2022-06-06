@@ -2,9 +2,7 @@
   
   import { getContext } from 'svelte';
 
-  import PromptOpenBook from './PromptOpenBook.svelte';
-
-  const { open } = getContext('simple-modal');
+  const { close } = getContext('simple-modal');
 
   import { getNotificationsContext } from 'svelte-notifications';
   const { addNotification } = getNotificationsContext();
@@ -12,6 +10,7 @@
   import { 
     currentBook,
     currentBookTitle,
+    currentBookCount,
   } from './stores.js';
 
   function notify(textValue){
@@ -26,42 +25,52 @@
     });
   }
 
-  let count = 0;
+  function openTestBook() {
 
-  function handleOpenBookClick(){
-    
-    let newBook = { title: 'Test ' + count };
+    let newBook = { title: 'Test ' + $currentBookCount };
     $currentBook = newBook;
-    count++;
+    $currentBookCount = $currentBookCount + 1;
     
     notify('opened book: ' + $currentBookTitle);
   }
+  
+  function handleCloseClick(){
 
-  const showPromptOpenBook = () => {
-    open(PromptOpenBook);
-  };
+    openTestBook();
+    close();
+  }
+
 
 </script>
 
-<div class="open-book-option">
+<div class='daedalus-lab'>
   
-  <a 
-    href="#openBook"
-    on:click={showPromptOpenBook}
-  > 
-    Open Book 
-  </a>
+    <div class="lab-item">
+      <a 
+        href="#ClosedPrompt"
+        on:click={handleCloseClick}
+      > 
+        Close
+      </a>
+    </div>
+  
 </div>
 
 <style>
 
+.daedalus-lab {
+  border: solid;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
 
-.open-book-option {
+.lab-item {
   margin: 10px;
   padding: 10px;
   border: thin solid;
   border-radius: 10px;
 }
-
 
 </style>
