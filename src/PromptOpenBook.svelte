@@ -25,35 +25,46 @@
     });
   }
 
-  function openTestBook() {
+  function openBook() {
 
-    let newBook = { title: 'Test ' + $currentBookCount };
+    // let newBook = { title: 'Test ' + $currentBookCount };
+    // $currentBook = newBook;
+    // $currentBookCount = $currentBookCount + 1;
+
+    let newBook = { title: bookName };
     $currentBook = newBook;
-    $currentBookCount = $currentBookCount + 1;
-    
+
     notify('opened book: ' + $currentBookTitle);
   }
   
-  function handleCloseClick(){
+  function handleOpenClick(){
 
-    openTestBook();
+    if(!bookName){
+      notify('name cannnot be empty');
+      return;
+    }
+    
+    openBook();
     close();
   }
 
+  let bookName = '';
 
 </script>
 
 <div class='daedalus-lab'>
   
-    <div class="lab-item">
-      <a 
-        href="#ClosedPrompt"
-        on:click={handleCloseClick}
-      > 
-        Close
-      </a>
-    </div>
-  
+  <input bind:value={bookName} placeholder="enter book name" />  
+
+  <div class="lab-item">
+    <a 
+      href="#OpenBook"
+      on:click={handleOpenClick}
+    > 
+      Open
+    </a>
+  </div>
+
 </div>
 
 <style>
